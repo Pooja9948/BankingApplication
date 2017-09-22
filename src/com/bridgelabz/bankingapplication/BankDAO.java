@@ -18,13 +18,11 @@ public class BankDAO {
 	}
 
 	public static String insertUserDetail() {
-		// TODO Auto-generated method stub
 		String query="INSERT INTO `banking_application`.`user_detail` (`name`, `email`, `password`, `mobileno`) VALUES (?,?,?,?)";
 		return query;
 	}
 
 	public static String checkUserDetail() {
-		// TODO Auto-generated method stub
 		String query="SELECT * FROM `banking_application`.`user_detail` WHERE email=? and password=?";
 		return query;
 	}

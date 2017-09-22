@@ -62,11 +62,16 @@ public class Login extends HttpServlet {
 	    
 	    
 	    if(value==2){
-		    RequestDispatcher dispatcher= request.getRequestDispatcher("home.html");
-		    dispatcher.forward(request, response);
-		    HttpSession session = request.getSession(true);
+	    	HttpSession session = request.getSession();
+	    	System.out.println(uname);
+	    	System.out.println(id+" 4565347");
 		    session.setAttribute("uname", uname);
 		    session.setAttribute("id", id);
+		    String s =(String) session.getAttribute("uname");
+		    System.out.println(s);
+		    RequestDispatcher dispatcher= request.getRequestDispatcher("home.html");
+		    dispatcher.forward(request, response);
+		    
 	    }else{
 	    	RequestDispatcher dispatcher= request.getRequestDispatcher("Login.html");
 		    dispatcher.forward(request, response);
