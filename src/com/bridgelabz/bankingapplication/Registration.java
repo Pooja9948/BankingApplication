@@ -59,7 +59,7 @@ public class Registration extends HttpServlet{
 	            se.printStackTrace();
 	         }
 	      }
-	    RequestDispatcher dispatcher= request.getRequestDispatcher("Login.html");
+	    RequestDispatcher dispatcher= request.getRequestDispatcher("login.jsp");
 	    dispatcher.include(request, response);
 	}
 }

@@ -116,8 +116,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var city = "";
-	var email = "";
-	var id;
 	console.log("Starting javascript");
 });
 
@@ -134,7 +132,7 @@ function displayCityData(city) {
 			console.log(result);
 			$('#details-table').html(result);
 			$('#body-of-modal').html(result);
-			$('#cityModal').modal('show');
+			$('#myModal1').modal('show');
 		}
 	});
 }

@@ -69,11 +69,13 @@ public class Login extends HttpServlet {
 		    session.setAttribute("id", id);
 		    String s =(String) session.getAttribute("uname");
 		    System.out.println(s);
-		    RequestDispatcher dispatcher= request.getRequestDispatcher("home.html");
-		    dispatcher.forward(request, response);
+		    response.sendRedirect("home.jsp");
+		 /*   
+		    RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
+		    dispatcher.forward(request, response);*/
 		    
 	    }else{
-	    	RequestDispatcher dispatcher= request.getRequestDispatcher("Login.html");
+	    	RequestDispatcher dispatcher= request.getRequestDispatcher("login.jsp");
 		    dispatcher.forward(request, response);
 	    }
 	}

@@ -66,7 +66,7 @@ public class Home extends HttpServlet{
 	         }
 	      }
 	    System.out.println("jefkwrerge");
-	    RequestDispatcher dispatcher= request.getRequestDispatcher("home.html");
+	    RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
 	    dispatcher.forward(request, response);
 	}
 }
