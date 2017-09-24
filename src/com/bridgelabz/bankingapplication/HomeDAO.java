@@ -12,4 +12,7 @@ public class HomeDAO {
 		String query="SELECT * FROM `banking_application`.`customer_detail` WHERE city=? and inputby=?";
 		return query;
 	}
+	public static void updateUserDetail(){
+		String query="";
+	}
 }

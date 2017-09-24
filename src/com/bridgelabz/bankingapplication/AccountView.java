@@ -47,6 +47,7 @@ public class AccountView extends HttpServlet{
 	        	customerdetail1.setName(resultset.getString("name"));
 	        	customerdetail1.setEmail(resultset.getString("email"));
 	        	customerdetail1.setAccountno(resultset.getString("accountno"));
+	        	customerdetail1.setCity(resultset.getString("city"));
 	        	obj.add(customerdetail1);
 	        	
 	        /*response.sendRedirect("accountview.jsp");*/

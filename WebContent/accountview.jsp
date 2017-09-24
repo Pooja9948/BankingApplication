@@ -25,8 +25,8 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th>AccountNumber</th>
-				<th></th>
-				<th></th>
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,8 +37,8 @@
 				<td><a class="name"><%=customer.getName()%></a></td>
 				<td><a class="email"><%=customer.getEmail()%></a></td>
 				<td><a class="accountnumber"><%=customer.getAccountno()%></a></td>
-				<td></td>
-				<td></td>
+				<td><button type="button" name="edit" onclick="return updateAccount('<%=customer.getId()%>')" data-toggle="modal" data-target="#myModal"  class="btn btn-success">Edit</button></td>
+				<td><button type="submit" onclick="return deleteAccount('<%=customer.getId()%>')"  class="btn btn-success">Delete</button></td>
 			</tr>		
 		<%
 			}

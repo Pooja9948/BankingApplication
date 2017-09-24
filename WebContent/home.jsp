@@ -38,11 +38,11 @@
 	<div class="container">
 		<div class="x">
 			<button type="button" data-toggle="modal" data-target="#cityModal"
-				onclick="ajaxfunction('bangalore')" class="btn btn-primary btn-lg">Bangalore</button>
+				onclick="cityData('bangalore')" class="btn btn-primary btn-lg">Bangalore</button>
 			<button type="button" data-toggle="modal" data-target="#cityModal"
-				onclick="ajaxfunction('mumbai')" class="btn btn-primary btn-lg">Mumbai</button>
+				onclick="cityData('mumbai')" class="btn btn-primary btn-lg">Mumbai</button>
 			<button type="button" data-toggle="modal" data-target="#cityModal"
-				onclick="ajaxfunction('delhi')" class="btn btn-primary btn-lg">Delhi</button>
+				onclick="cityData('delhi')" class="btn btn-primary btn-lg">Delhi</button>
 		</div>
 		<h1><%=session.getAttribute("uname") %></h1>
 		<!-- Modal -->
@@ -137,10 +137,11 @@
 	$(document).ready(function() {
 		alert("inside function");
 		var city = "";
+		var id = "";
 		console.log("Starting javascript");
 	});
 
-	function ajaxfunction(city) {
+	function cityData(city) {
 		console.log("inside javascript");
 		$.ajax({
 			type : 'POST',
@@ -154,6 +155,23 @@
 				$('#details-table').html(result);
 				$('#body-of-modal').html(result);
 				$('#cityModal').modal('show');
+			}
+		});
+	}
+	function updateAccount(id) {
+		console.log("inside javascript");
+		$.ajax({
+			type : 'POST',
+			url : 'AccountView',
+			data : {
+				city : city
+			},
+			success : function(result) {
+				console.log("ajax success");
+				console.log(result);
+				$('#details-table').html(result);
+				$('#body-of-modal').html(result);
+				$('#myModal').modal('show');
 			}
 		});
 	}
