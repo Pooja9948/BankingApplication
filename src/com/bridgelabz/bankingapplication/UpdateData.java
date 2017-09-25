@@ -4,19 +4,51 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UpdateData extends HttpServlet{
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		int id= Integer.parseInt(request.getParameter("id"));
-		System.out.println("id : "+id);
+		System.out.println("inside update data class");
+		String customer_detailid= request.getParameter("id");
+		System.out.println("id : "+customer_detailid);
 		PreparedStatement preparestatement=null;
 		Connection connection=null;
 		//String selectquery=HomeDAO.updateUserDetail();
+		try {
+	    	connection=BankDAO.getConnection();
+	    	//preparestatement = connection.prepareStatement(selectquery);
+	    	CustomerDetail customerdetail = new CustomerDetail();
+	    	customerdetail.setId(customer_detailid);
+	    	preparestatement.setString(2, customerdetail.getId());
+	    	preparestatement.executeUpdate();
+		}catch(SQLException se) {
+	         se.printStackTrace();
+	      } finally {
+	         try {
+	            if(preparestatement!=null)
+	            	preparestatement.close();
+	            
+	         }catch(SQLException se2) {
+	        	 se2.printStackTrace();
+	         }
+	         try {
+	            if(connection!=null)
+	            connection.close();
+	         } catch(SQLException se) {
+	            se.printStackTrace();
+	         }
+	      }
+		System.out.println("abcdefghijk");
+	    RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
+	    dispatcher.forward(request, response);
 	}
 }

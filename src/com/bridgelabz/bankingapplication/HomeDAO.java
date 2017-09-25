@@ -8,11 +8,16 @@ public class HomeDAO {
 		return query;
 	}
 
-	public static String getUserDetail() {
+	public static String getAllCustomerDetail() {
 		String query="SELECT * FROM `banking_application`.`customer_detail` WHERE city=? and inputby=?";
 		return query;
 	}
-	public static void updateUserDetail(){
-		String query="";
+	public static String updateCustomerDetail(){
+		String query="UPDATE `banking_application`.`customer_detail` SET name=? , email=? , accountno=? ,city=? WHERE customer_detailid=?";
+		return query;
+	}
+	public static String getCustomerDetail(){
+		String query="SELECT * FROM `banking_application`.`customer_detail` WHERE customer_detailid=?";
+		return query;
 	}
 }

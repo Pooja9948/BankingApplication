@@ -20,17 +20,17 @@ import javax.servlet.http.HttpSession;
 public class AccountView extends HttpServlet{
 	public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException{
 		 List<CustomerDetail> obj = new ArrayList<CustomerDetail>();
-		System.out.println("inside AccountView");
+		//System.out.println("inside AccountView");
 		String city= request.getParameter("city");
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
-		System.out.println(id+" :id8324 "+city+" :city");
+		//System.out.println(id+" :id8324 "+city+" :city");
 		PreparedStatement preparestatement=null;
 		Connection connection=null;
 		ResultSet resultset=null;
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-	    String selectquery=HomeDAO.getUserDetail();
+	    String selectquery=HomeDAO.getAllCustomerDetail();
 	    try {
 	    	connection=BankDAO.getConnection();
 	    	preparestatement = connection.prepareStatement(selectquery);

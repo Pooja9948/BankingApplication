@@ -56,7 +56,57 @@
 					</div>
 
 					<div class="modal-body">
-						<form class="form" action="Home" method="get">
+					
+					<%-- <h1><%=request.getParameter("name") %></h1>
+					<h1><%=request.getParameter("email") %></h1>
+					<h1><%=request.getAttribute("accountno") %></h1>
+					<h1><%=request.getAttribute("city") %></h1> --%>
+					<%
+						if (request.getAttribute("name")!=null) {
+					%>
+						<form class="form" action="Home" method="Post" style="z-index:1060">
+							<!-- put if condition for id  -->
+							<div class="container">
+								<div class="row">
+									<div class="control-group">
+										<div class="controls">
+											<label class="col-sm-3">Name</label> <input id="name"
+												name="name" value="<%=request.getAttribute("name") %>" type="text" placeholder="" class="input-xlarge"
+												required=""><%=request.getAttribute("name") %>
+
+										</div>
+										<div class="controls">
+											<label class="col-sm-3">EmailId</label> <input id="email"
+												name="email" value=<%=request.getAttribute("email")%> type="email" placeholder=""
+												class="input-xlarge" required="">
+
+										</div>
+										<div class="controls">
+											<label class="col-sm-3">Account No</label> <input
+												id="accountno" name="accountno" value=<%= request.getAttribute("accountno")%> type="text" placeholder=""
+												class="input-xlarge" required="">
+
+										</div>
+										<div class="controls">
+											<label class="col-sm-3">City</label> <select id="city"
+												name="city" value=<%= request.getAttribute("city")%> class="col-sm-2">
+												<option value="bangalore">Bangalore</option>
+												<option value="mumbai">Mumbai</option>
+												<option value="delhi">Delhi</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" name="submit" id="submit"
+									class="btn btn-info data-dismiss="modal">
+								<button type="close" name="close" id="close" value="Close"
+									class="btn btn-info data-dismiss="modal">Close</button>
+							</div>
+						</form>
+						<%} else{%>
+						<form class="form" action="Home" method="Post" style="z-index:1050">
 							<!-- put if condition for id  -->
 							<div class="container">
 								<div class="row">
@@ -97,6 +147,8 @@
 									class="btn btn-info data-dismiss="modal">Close</button>
 							</div>
 						</form>
+						<%} %>
+						
 					</div>
 				</div>
 			</div>
@@ -162,15 +214,18 @@
 		console.log("inside javascript");
 		$.ajax({
 			type : 'POST',
-			url : 'AccountView',
+			url : 'Home',
 			data : {
-				city : city
+				id : id
 			},
 			success : function(result) {
+				alert('inside update account success')
 				console.log("ajax success");
 				console.log(result);
-				$('#details-table').html(result);
-				$('#body-of-modal').html(result);
+				$('#name').val(result.name);
+				$('#email').val(result.email);
+				$('#accountno').val(result.accountno);
+				$('#city').val(result.city);
 				$('#myModal').modal('show');
 			}
 		});
