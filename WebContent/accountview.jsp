@@ -20,30 +20,35 @@
 	%>
 	<table class="table table-hover">
 		<form method="get">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>AccountNumber</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-		<%
-		for (CustomerDetail customer : list) {
-		%>
-			<tr>
-				<td><a class="name"><%=customer.getName()%></a></td>
-				<td><a class="email"><%=customer.getEmail()%></a></td>
-				<td><a class="accountnumber"><%=customer.getAccountno()%></a></td>
-				<td><button type="button" name="edit" onclick="return updateAccount('<%=customer.getId()%>')" data-toggle="modal" data-target="#myModal"  class="btn btn-success">Edit</button></td>
-				<td><button type="submit" onclick="return deleteAccount('<%=customer.getId()%>')"  class="btn btn-success">Delete</button></td>
-			</tr>		
-		<%
-			}
-		%>
-		</tbody>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>AccountNumber</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					for (CustomerDetail customer : list) {
+				%>
+				<tr>
+					<td><a class="name"><%=customer.getName()%></a></td>
+					<td><a class="email"><%=customer.getEmail()%></a></td>
+					<td><a class="accountnumber"><%=customer.getAccountno()%></a></td>
+					<td><button type="button" name="edit"
+							onclick="return updateAccount('<%=customer.getId()%>')"
+							data-toggle="modal" data-target="#editModal"
+							class="btn btn-success">Edit</button></td>
+					<td><button type="submit"
+							onclick="return deleteAccount('<%=customer.getId()%>')"
+							class="btn btn-success">Delete</button></td>
+				</tr>
+				<%
+					}
+				%>
+			</tbody>
 		</form>
 	</table>
 </body>

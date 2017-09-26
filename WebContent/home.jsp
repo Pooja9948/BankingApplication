@@ -1,3 +1,4 @@
+<%@page import="com.bridgelabz.bankingapplication.BankDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.bridgelabz.bankingapplication.CustomerDetail"%>
 <%@page import="java.util.List"%>
@@ -17,24 +18,26 @@
 <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 <body>
-<%HttpSession session1=request.getSession();
-   String sting=(String)session1.getAttribute("uname");
-   if(sting==""){ 
-	   RequestDispatcher dispatcher= request.getRequestDispatcher("login.jsp");
-	    dispatcher.forward(request, response);
-	}else {%>
+	<%
+		HttpSession session1 = request.getSession();
+		String sting = (String) session1.getAttribute("uname");
+		if (sting == "") {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+		} else {
+	%>
 
-	
+
 	<div class="well">
 		<div style="background-color: cyan; font-size: 40px" align="center">
 			Welcome to Banking Application</div>
 		<div style="background-color: cyan; font-size: 40px" align="right">
-		<form action="Logout">
-			<input type="submit" value="Logout" class="btn btn-primary" >
+			<form action="Logout">
+				<input type="submit" value="Logout" class="btn btn-primary">
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="container">
 		<div class="x">
 			<button type="button" data-toggle="modal" data-target="#cityModal"
@@ -43,53 +46,45 @@
 				onclick="cityData('mumbai')" class="btn btn-primary btn-lg">Mumbai</button>
 			<button type="button" data-toggle="modal" data-target="#cityModal"
 				onclick="cityData('delhi')" class="btn btn-primary btn-lg">Delhi</button>
+
 		</div>
-		<h1><%=session.getAttribute("uname") %></h1>
+		<h1><%=session.getAttribute("uname")%></h1>
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="editModal" role="dialog"
+			style="z-index: 1060">
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Account Details</h4>
+						<h4 class="modal-title">Update Details</h4>
 					</div>
 
 					<div class="modal-body">
-					
-					<%-- <h1><%=request.getParameter("name") %></h1>
-					<h1><%=request.getParameter("email") %></h1>
-					<h1><%=request.getAttribute("accountno") %></h1>
-					<h1><%=request.getAttribute("city") %></h1> --%>
-					<%
-						if (request.getAttribute("name")!=null) {
-					%>
-						<form class="form" action="Home" method="Post" style="z-index:1060">
+						<form class="form" action="Home" method="post"
+							style="z-index: 1050">
 							<!-- put if condition for id  -->
 							<div class="container">
 								<div class="row">
 									<div class="control-group">
 										<div class="controls">
 											<label class="col-sm-3">Name</label> <input id="name"
-												name="name" value="<%=request.getAttribute("name") %>" type="text" placeholder="" class="input-xlarge"
-												required=""><%=request.getAttribute("name") %>
-
+												name="name" type="text" placeholder="" class="input-xlarge"
+												required="">
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">EmailId</label> <input id="email"
-												name="email" value=<%=request.getAttribute("email")%> type="email" placeholder=""
+												name="email" type="email" placeholder=""
 												class="input-xlarge" required="">
-
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">Account No</label> <input
-												id="accountno" name="accountno" value=<%= request.getAttribute("accountno")%> type="text" placeholder=""
+												id="accountno" name="accountno" type="text" placeholder=""
 												class="input-xlarge" required="">
-
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">City</label> <select id="city"
-												name="city" value=<%= request.getAttribute("city")%> class="col-sm-2">
+												name="city" class="col-sm-2">
 												<option value="bangalore">Bangalore</option>
 												<option value="mumbai">Mumbai</option>
 												<option value="delhi">Delhi</option>
@@ -99,14 +94,32 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<input type="submit" name="submit" id="submit"
-									class="btn btn-info data-dismiss="modal">
+								<input type="submit" name="submit" id="submit" onClick="addData()" class="btn btn-info data-dismiss="modal">
 								<button type="close" name="close" id="close" value="Close"
 									class="btn btn-info data-dismiss="modal">Close</button>
 							</div>
 						</form>
-						<%} else{%>
-						<form class="form" action="Home" method="Post" style="z-index:1050">
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Modal for edit  -->
+		<div class="modal fade" id="myModal" role="dialog"
+			style="z-index: 1060">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Details</h4>
+					</div>
+
+					<div class="modal-body">
+						<h1 id="id"></h1>
+						<form class="form" action="Home" method="Post"
+							style="z-index: 1050">
 							<!-- put if condition for id  -->
 							<div class="container">
 								<div class="row">
@@ -147,17 +160,14 @@
 									class="btn btn-info data-dismiss="modal">Close</button>
 							</div>
 						</form>
-						<%} %>
-						
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
-		<div class="modal fade" id="cityModal" role="dialog">
+
+
+		<div class="modal fade" id="cityModal" role="dialog"
+			style="z-index: 1050">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header" id="city-title">
@@ -172,9 +182,11 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
-	<%} %>
+	<%
+		}
+	%>
 </body>
 <footer>
 <button type="button" id="div1" class="btn btn-success"
@@ -190,6 +202,7 @@
 		alert("inside function");
 		var city = "";
 		var id = "";
+		var currentId="";
 		console.log("Starting javascript");
 	});
 
@@ -203,7 +216,7 @@
 			},
 			success : function(result) {
 				console.log("ajax success");
-				console.log(result);
+				console.log();
 				$('#details-table').html(result);
 				$('#body-of-modal').html(result);
 				$('#cityModal').modal('show');
@@ -215,18 +228,55 @@
 		$.ajax({
 			type : 'POST',
 			url : 'Home',
+			dataType : 'JSON',
 			data : {
 				id : id
 			},
 			success : function(result) {
 				alert('inside update account success')
-				console.log("ajax success");
-				console.log(result);
+				console.log("ajax success1");
+				console.log(result.name);
 				$('#name').val(result.name);
 				$('#email').val(result.email);
 				$('#accountno').val(result.accountno);
 				$('#city').val(result.city);
-				$('#myModal').modal('show');
+				$('#id').html(id);
+
+				$('#editModal').modal('show');
+			},
+			error : function(result) {
+				console.log("Woah");
+				console.log(result);
+			}
+		});
+	}
+
+	function addData() {
+		console.log($('#name').val());
+		$.ajax({
+			url : 'Home',
+			type : 'POST',
+			data : 
+			{
+				name : $('#name').val(),
+				email : $('#email').val(),
+				city : $('#city').val(),
+				accountno : $('#accountno').val(),
+				id : currentId
+			},
+			success : function() 
+			{
+				console.log("Added");
+				$('#name').val(" "), 
+				$('#email').val(" "), 
+				$('#city').val(" "),
+				$('#accountno').val(" "), 
+				$('#editModal').modal('hide');
+				if (edited == 1) {
+					cityData(currentCity);
+					edited = 0;
+				}
+				currentId = 0;
 			}
 		});
 	}

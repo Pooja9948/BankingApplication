@@ -3,6 +3,7 @@ package com.bridgelabz.bankingapplication;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class BankDAO {
 	
@@ -27,4 +28,10 @@ public class BankDAO {
 		return query;
 	}
 	 
+	public static int hello(){
+		Random r = new Random();
+		int n = r.nextInt(10);
+		System.out.println(n);
+		return n;
+	}
 }

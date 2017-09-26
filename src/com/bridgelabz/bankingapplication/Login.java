@@ -61,6 +61,7 @@ public class Login extends HttpServlet {
 	      }
 	    
 	    
+	    
 	    if(value==2){
 	    	HttpSession session = request.getSession();
 	    	System.out.println(uname);
@@ -69,6 +70,10 @@ public class Login extends HttpServlet {
 		    session.setAttribute("id", id);
 		    String s =(String) session.getAttribute("uname");
 		    System.out.println(s);
+		    CustomerDetail cs = new CustomerDetail();
+		    cs.setName((String) request.getAttribute("name"));
+		    cs.setCity((String) request.getAttribute("city"));
+		    request.setAttribute("detail",cs );
 		    response.sendRedirect("home.jsp");
 		 /*   
 		    RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
