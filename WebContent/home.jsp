@@ -1,6 +1,4 @@
-<%@page import="com.bridgelabz.bankingapplication.BankDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.bridgelabz.bankingapplication.CustomerDetail"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -60,26 +58,27 @@
 						<h4 class="modal-title">Update Details</h4>
 					</div>
 
-					<div class="modal-body">
-						<form class="form" action="Home" method="post"
+					<div class="modal-body"><h1 id="id"></h1>
+						<form name="myform" class="form" action="UpdateCustomerData" method="post" onsubmit="return validateform()"
 							style="z-index: 1050">
 							<!-- put if condition for id  -->
 							<div class="container">
 								<div class="row">
 									<div class="control-group">
+										<input id="id1" type="hidden" name="id1" value="">
 										<div class="controls">
 											<label class="col-sm-3">Name</label> <input id="name"
-												name="name" type="text" placeholder="" class="input-xlarge"
+												name="name" value="" type="text" placeholder="" class="input-xlarge"
 												required="">
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">EmailId</label> <input id="email"
-												name="email" type="email" placeholder=""
+												name="email" value="" type="email" placeholder=""
 												class="input-xlarge" required="">
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">Account No</label> <input
-												id="accountno" name="accountno" type="text" placeholder=""
+												id="accountno" name="accountno" value="" type="text" placeholder=""
 												class="input-xlarge" required="">
 										</div>
 										<div class="controls">
@@ -94,7 +93,7 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<input type="submit" name="submit" id="submit" onClick="addData()" class="btn btn-info data-dismiss="modal">
+								<input type="submit" name="submit" id="submit"  class="btn btn-info data-dismiss="modal">
 								<button type="close" name="close" id="close" value="Close"
 									class="btn btn-info data-dismiss="modal">Close</button>
 							</div>
@@ -117,8 +116,8 @@
 					</div>
 
 					<div class="modal-body">
-						<h1 id="id"></h1>
-						<form class="form" action="Home" method="Post"
+						<!-- <h1 id="id"></h1> -->
+						<form name="myform" class="form" action="Home" method="Post" onsubmit="return validateform()"
 							style="z-index: 1050">
 							<!-- put if condition for id  -->
 							<div class="container">
@@ -128,19 +127,16 @@
 											<label class="col-sm-3">Name</label> <input id="name"
 												name="name" type="text" placeholder="" class="input-xlarge"
 												required="">
-
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">EmailId</label> <input id="email"
 												name="email" type="email" placeholder=""
 												class="input-xlarge" required="">
-
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">Account No</label> <input
 												id="accountno" name="accountno" type="text" placeholder=""
 												class="input-xlarge" required="">
-
 										</div>
 										<div class="controls">
 											<label class="col-sm-3">City</label> <select id="city"
@@ -240,7 +236,7 @@
 				$('#email').val(result.email);
 				$('#accountno').val(result.accountno);
 				$('#city').val(result.city);
-				$('#id').html(id);
+				$('#id1').val(id);
 
 				$('#editModal').modal('show');
 			},
@@ -252,33 +248,86 @@
 	}
 
 	function addData() {
+		alert('inside adddata');
 		console.log($('#name').val());
+		console.log("id : "+$('#id1').val()+
+				"name : "+$('#name').val()+
+				"email : "+$('#email').val()+
+				"city : "+$('#city').val()+
+				"accountno :"+$('#accountno').val());
 		$.ajax({
-			url : 'Home',
+			url : 'UpdateCustomerData',
 			type : 'POST',
 			data : 
 			{
+				id : $('#id1').val(),
 				name : $('#name').val(),
 				email : $('#email').val(),
 				city : $('#city').val(),
 				accountno : $('#accountno').val(),
-				id : currentId
+				//id : currentId
 			},
 			success : function() 
 			{
+				alert('data edited');
 				console.log("Added");
-				$('#name').val(" "), 
+				/* $('#name').val(" "), 
 				$('#email').val(" "), 
 				$('#city').val(" "),
-				$('#accountno').val(" "), 
+				$('#accountno').val(" "),
+				
 				$('#editModal').modal('hide');
 				if (edited == 1) {
 					cityData(currentCity);
 					edited = 0;
 				}
-				currentId = 0;
+				currentId = 0; */
 			}
 		});
+	}
+	function deleteAccount(id){
+		alert('inside deleteaccount');
+		console.log("inside javascript");
+		$.ajax({
+			type : 'POST',
+			url : 'DeleteCustomer',
+			//dataType : 'JSON',
+			data : {
+				id : id
+			},
+			success : function(result) {
+				alert('inside delete account success')
+				console.log("ajax success1");
+				console.log(result.name);
+			}
+		});
+	}
+	function validateform(){  
+		var name=document.myform.name.value;  
+		var email=document.myform.email.value;
+		var accountno=document.myform.accountno.value;
+		var city=document.myform.city.value;
+		  
+		if (name==null || name==""){  
+		  alert("Name can't be blank");  
+		  return false;  
+		}
+		if (email==null || email==""){  
+			  alert("email can't be blank");  
+			  return false;  
+		}
+		if (accountno==null || accountno==""){  
+			  alert("accountno can't be blank");  
+			  return false;  
+		}
+		if (city==null || city==""){  
+			  alert("city can't be blank");  
+			  return false;  
+		}
+		/* else if(password.length<6){  
+		  alert("Password must be at least 6 characters long.");  
+		  return false;  
+		} */  
 	}
 </script>
 </html>

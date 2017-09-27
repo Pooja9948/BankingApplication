@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.pojo;
 
 public class UserDetails {
 	private int id;

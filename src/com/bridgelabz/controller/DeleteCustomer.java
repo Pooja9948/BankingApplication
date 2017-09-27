@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,30 +6,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UpdateData extends HttpServlet{
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		System.out.println("inside update data class");
-		String customer_detailid= request.getParameter("id");
-		System.out.println("id : "+customer_detailid);
+import com.bridgelabz.DAO.BankDAO;
+import com.bridgelabz.DAO.HomeDAO;
+import com.bridgelabz.pojo.CustomerDetail;
+
+@WebServlet("/DeleteCustomer")
+public class DeleteCustomer extends HttpServlet{
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		resp.setContentType("text/html");
 		PreparedStatement preparestatement=null;
 		Connection connection=null;
-		//String selectquery=HomeDAO.updateUserDetail();
+		System.out.println(" inside DeleteCustomer class");
+		String customer_detailid = req.getParameter("id");
+		System.out.println(" customer_detailid "+customer_detailid);
+		String deletequery=HomeDAO.deleteCustomer();
 		try {
 	    	connection=BankDAO.getConnection();
-	    	//preparestatement = connection.prepareStatement(selectquery);
+	    	preparestatement = connection.prepareStatement(deletequery);
 	    	CustomerDetail customerdetail = new CustomerDetail();
-	    	customerdetail.setId(customer_detailid);
-	    	preparestatement.setString(2, customerdetail.getId());
-	    	preparestatement.executeUpdate();
+			customerdetail.setId(customer_detailid);
+			preparestatement.setString(1, customerdetail.getId());
+			preparestatement.executeUpdate();
 		}catch(SQLException se) {
 	         se.printStackTrace();
 	      } finally {
@@ -47,8 +52,5 @@ public class UpdateData extends HttpServlet{
 	            se.printStackTrace();
 	         }
 	      }
-		System.out.println("abcdefghijk");
-	    RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
-	    dispatcher.forward(request, response);
 	}
 }

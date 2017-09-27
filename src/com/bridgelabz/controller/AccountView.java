@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.bridgelabz.DAO.BankDAO;
+import com.bridgelabz.DAO.HomeDAO;
+import com.bridgelabz.pojo.CustomerDetail;
 @WebServlet("/AccountView")
 public class AccountView extends HttpServlet{
 	public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException{

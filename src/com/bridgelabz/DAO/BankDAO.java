@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

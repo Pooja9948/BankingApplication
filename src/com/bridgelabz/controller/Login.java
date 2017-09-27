@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.bridgelabz.DAO.BankDAO;
+import com.bridgelabz.pojo.CustomerDetail;
+import com.bridgelabz.pojo.UserDetails;
 
 public class Login extends HttpServlet {
 	
@@ -75,8 +79,8 @@ public class Login extends HttpServlet {
 		    cs.setCity((String) request.getAttribute("city"));
 		    request.setAttribute("detail",cs );
 		    response.sendRedirect("home.jsp");
-		 /*   
-		    RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
+		    
+		    /*RequestDispatcher dispatcher= request.getRequestDispatcher("home.jsp");
 		    dispatcher.forward(request, response);*/
 		    
 	    }else{

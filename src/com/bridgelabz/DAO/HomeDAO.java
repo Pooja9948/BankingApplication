@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.DAO;
 
 public class HomeDAO {
 	
@@ -13,11 +13,17 @@ public class HomeDAO {
 		return query;
 	}
 	public static String updateCustomerDetail(){
+		System.out.println("inside updateCustomerDetail11111111111111111111");
 		String query="UPDATE `banking_application`.`customer_detail` SET name=? , email=? , accountno=? ,city=? WHERE customer_detailid=?";
 		return query;
 	}
 	public static String getCustomerDetail(){
 		String query="SELECT * FROM `banking_application`.`customer_detail` WHERE customer_detailid=?";
+		return query;
+	}
+
+	public static String deleteCustomer() {
+		String query="DELETE FROM `banking_application`.`customer_detail` WHERE customer_detailid=?";
 		return query;
 	}
 }

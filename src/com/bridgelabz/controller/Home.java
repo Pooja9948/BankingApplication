@@ -1,4 +1,4 @@
-package com.bridgelabz.bankingapplication;
+package com.bridgelabz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +17,10 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.bridgelabz.DAO.BankDAO;
+import com.bridgelabz.DAO.HomeDAO;
+import com.bridgelabz.pojo.CustomerDetail;
 
 public class Home extends HttpServlet {
 
@@ -58,7 +62,7 @@ public class Home extends HttpServlet {
 					JSONObject obj = updateAccount(Integer.parseInt(customer_detailid));
 					out.println(obj.toJSONString());
 					System.out.println("---home--->" + obj.get("name"));
-					Home.editAccount(Integer.parseInt(customer_detailid));
+					//Home.editAccount(Integer.parseInt(customer_detailid));
 					
 				}
 			} catch (SQLException se) {
@@ -176,12 +180,12 @@ public class Home extends HttpServlet {
 		return obj;
 	}
 
-	public static void editAccount(int id) {
+	/*public static void editAccount(int customer_detailid) {
 		try {
 			Connection con = BankDAO.getConnection();
 			String query = "UPDATE `banking_application`.`customer_detail` SET name=? , email=? , accountno=? ,city=? WHERE customer_detailid=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(5, id);
+			pstmt.setInt(5, customer_detailid);
 			CustomerDetail customerdetail = new CustomerDetail();
 			pstmt.setString(1, customerdetail.getName());
 			pstmt.setString(2, customerdetail.getEmail());
@@ -192,7 +196,7 @@ public class Home extends HttpServlet {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
+	}*/
 	
 	
 	

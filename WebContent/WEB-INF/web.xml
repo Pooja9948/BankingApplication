@@ -3,14 +3,12 @@
   <display-name>BankingApplication</display-name>
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
-    <!-- <welcome-file>RegistrationPage.jsp</welcome-file>
-    <welcome-file>home.jsp</welcome-file> -->
   </welcome-file-list>
   <servlet>
     <description></description>
     <display-name>Login</display-name>
     <servlet-name>Login</servlet-name>
-    <servlet-class>com.bridgelabz.bankingapplication.Login</servlet-class>
+    <servlet-class>com.bridgelabz.controller.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -20,7 +18,7 @@
     <description></description>
     <display-name>Home</display-name>
     <servlet-name>Home</servlet-name>
-    <servlet-class>com.bridgelabz.bankingapplication.Home</servlet-class>
+    <servlet-class>com.bridgelabz.controller.Home</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Home</servlet-name>
@@ -56,4 +54,14 @@
     <servlet-name>accountview</servlet-name>
     <url-pattern>/accountview</url-pattern>
   </servlet-mapping>
+  <!-- <servlet>
+    <description></description>
+    <display-name>UpdateCustomerData</display-name>
+    <servlet-name>UpdateCustomerData</servlet-name>
+    <servlet-class>com.bridgelabz.bankingapplication.UpdateCustomerData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCustomerData</servlet-name>
+    <url-pattern>/UpdateCustomerData</url-pattern>
+  </servlet-mapping> -->
 </web-app>
